@@ -26,12 +26,20 @@ class ContactActions extends React.Component {
   }
 
   render() {
-    return <Stack direction='horizontal' gap={3}>
-    <Button onClick={this.handleGenerateContact}>
-      Generate Contact
-    </Button>
+    return <Stack direction="horizontal" gap={3}>
+      <Button onClick={this.handleGenerateContact}>
+        Generate Contact
+      </Button>
+      { (this.props.selectedContact)
+        ? <Button variant="danger"
+                  onClick={this.props.onDeleteContact.bind(this, this.props.selectedContact)}>
+            Delete {this.props.selectedContact}
+          </Button>
+        : ""
+      }
     </Stack>
   }
+
 }
 
 export default ContactActions

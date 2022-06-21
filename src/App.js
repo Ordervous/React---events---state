@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = { contacts: [] };
     this.onNewContact = this.onNewContact.bind(this);
     this.handleContactSelected = this.handleContactSelected.bind(this);
-
+    this.handleDeleteContact = this.handleDeleteContact.bind(this);
   }
 
   onNewContact(contact) {
@@ -31,11 +31,22 @@ class App extends React.Component {
     })
   }
 
+  handleDeleteContact(email) {
+    this.setState((state) => {
+      return {
+        contacts: state.contacts.filter((contact) => contact.email !== email),
+        selected: null
+      }
+    })
+  }
+
   render() {
     return (
       <Stack gap={3} className="col-md-10 mx-auto">
-        <ContactActions onNewContact={this.onNewContact}/>
-        <ContactList contacts={this.state.contacts} onContactSelected={this.handleContactSelected}/>
+        <ContactActions onNewContact={this.onNewContact}
+          onDeleteContact={this.handleDeleteContact}
+          selectedContact={this.state.selected} />
+        <ContactList contacts={this.state.contacts} onContactSelected={this.handleContactSelected} />
         <ContactSummary contacts={this.state.contacts} />
       </Stack>
     )
