@@ -6,11 +6,13 @@ class ContactList extends React.Component {
 
   headings() {
     let headings = ["Name", "Email", "Phone Number"]
-    return <tr>{headings.map((heading) => <th>{heading}</th>)}</tr>
+    return <tr>{headings.map((heading) => <th key={heading}>{heading}</th>)}</tr>
   }
 
   contacts() {
-    return this.props.contacts.map((contact) => <Contact contact={contact} onContactSelected={this.props.onContactSelected}/>)
+    return this.props.contacts.map((contact) => <Contact contact={contact}
+    key={contact.email} 
+      onContactSelected={this.props.onContactSelected} />)
   }
 
   render() {
