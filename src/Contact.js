@@ -4,7 +4,7 @@ class Contact extends React.Component {
   render() {
     let { first_name, last_name, email, phone } = this.props.contact
     return (
-      <tr>
+      <tr onClick={this.props.onContactSelected.bind(this, email)}>
         <td>{first_name} {last_name}</td>
         <td><a href={`mailto:${email}`}>{email}</a></td>
         <td>{phone}</td>
