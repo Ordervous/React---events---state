@@ -2,16 +2,39 @@ import React from 'react'
 import Contact from './Contact.js'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
+import { faker } from '@faker-js/faker';
 
 class ContactList extends React.Component {
   constructor(props) {
     super(props)
+    // this.contactList = []
     this.handleGenerateContact = this.handleGenerateContact.bind(this)
+    this.state = { contacts: [] }
   }
 
-  handleGenerateContact() {
-    alert('Creating a new contact')
+  generateContact() {
+    let firstName = faker.name.firstName()
+    let lastName = faker.name.lastName()
+    return {
+      first_name: firstName,
+      last_name: lastName,
+      email: faker.internet.exampleEmail(firstName, lastName),
+      phone: faker.phone.phoneNumber()
+    }
   }
+// before set state 
+//   handleGenerateContact() {
+//     this.contactList.push(this.generateContact())
+//     this.forceUpdate()
+//   }
+handleGenerateContact() {
+    this.setState((state) => {
+      return {
+        contacts: state.contacts.concat(this.generateContact())
+      }
+    });
+  }
+
 
   headings() {
     let headings = ["Name", "Email", "Phone Number"]
@@ -19,6 +42,7 @@ class ContactList extends React.Component {
   }
 
   contacts() {
+    return this.state.contacts.map((contact) => <Contact contact={contact} />)
   }
 
   render() {
