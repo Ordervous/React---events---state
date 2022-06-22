@@ -3,6 +3,7 @@ import Stack from 'react-bootstrap/Stack'
 import ContactList from './ContactList'
 import ContactSummary from './ContactSummary'
 import ContactActions from './ContactActions'
+import ContactForm from './ContactForm';
 // import Contact from './Contact.js'
 
 
@@ -44,8 +45,9 @@ class App extends React.Component {
     return (
       <Stack gap={3} className="col-md-10 mx-auto">
         <ContactActions onNewContact={this.onNewContact}
-          onDeleteContact={this.handleDeleteContact}
-          selectedContact={this.state.selected} />
+                        onDeleteContact={this.handleDeleteContact}
+                        selectedContact={this.state.selected} />
+        <ContactForm onSubmit={this.onNewContact}/>               
         <ContactList contacts={this.state.contacts} onContactSelected={this.handleContactSelected} />
         <ContactSummary contacts={this.state.contacts} />
       </Stack>
